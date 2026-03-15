@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
+.cursor/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+
+# Packages — shared-types build output
+packages/shared-types/dist/
+packages/shared-types/node_modules/
+
+# Misc
+*.key
