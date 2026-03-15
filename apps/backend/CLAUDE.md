@@ -4,9 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
+### In Docker (recommended)
+
 ```bash
-composer setup    # First-time setup: install deps, .env, key:generate, migrate, npm install & build
-composer dev      # Start all dev services concurrently: server + queue listener + pail logs + npm dev
+docker-compose up -d                                        # Start all services
+docker-compose exec backend php artisan migrate             # Run migrations
+docker-compose exec backend php artisan tinker              # Laravel REPL
+docker-compose exec backend php artisan test                # Run test suite
+docker-compose exec backend composer lint                   # Fix code style
+docker-compose exec backend composer analyse                # PHPStan analysis
+```
+
+### Local (without Docker)
+
+```bash
+composer setup    # First-time setup: install deps, .env, key:generate, migrate
+composer dev      # Start all dev services concurrently: server + queue + logs + vite
 composer test     # php artisan config:clear && php artisan test
 ```
 

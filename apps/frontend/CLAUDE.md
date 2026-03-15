@@ -4,12 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
+### In Docker (recommended)
+
+```bash
+docker-compose up -d frontend               # Start frontend service
+docker-compose logs -f frontend             # Follow logs (http://localhost:3000)
+docker-compose exec frontend npm run lint   # ESLint
+docker-compose exec frontend npm run typecheck  # TypeScript check
+```
+
+> **Note:** do not run `npm install` inside `apps/frontend/` on the host — Node dependencies must stay in the Docker container. Running npm on the host will create `node_modules/` with macOS binaries that break the container.
+
+### Local (without Docker)
+
 ```bash
 npm run dev          # Start Nuxt dev server (with DevTools enabled)
 npm run build        # Production build
-npm run generate     # Static site generation
-npm run preview      # Preview production build
-npm run postinstall  # nuxt prepare — regenerates .nuxt/ types (auto-runs after npm install)
+npm run postinstall  # nuxt prepare — regenerates .nuxt/ types after adding modules
 npm run lint         # ESLint — check Vue/TypeScript
 npm run lint:fix     # ESLint — auto-fix
 npm run typecheck    # TypeScript strict type check
