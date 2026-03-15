@@ -21,12 +21,14 @@ You are the QA specialist for the Rendevo monorepo.
 
 ## Commands
 
+All commands run inside the Docker container:
+
 ```bash
-composer test
-php artisan test --filter TestClassName
-php artisan test tests/Feature/Api/
-php artisan test tests/Unit/Billing/
-php artisan test --coverage
+docker-compose exec backend composer test
+docker-compose exec backend php artisan test --filter TestClassName
+docker-compose exec backend php artisan test tests/Feature/Api/
+docker-compose exec backend php artisan test tests/Unit/Billing/
+docker-compose exec backend php artisan test --coverage
 ```
 
 ## Test plan format

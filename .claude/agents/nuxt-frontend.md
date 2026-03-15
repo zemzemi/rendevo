@@ -20,6 +20,15 @@ You are a Nuxt 4 / Vue 3 / TypeScript specialist working in `apps/frontend/`.
 - UI: shadcn-vue — components in `app/components/ui/` (CLI-managed)
 - File-based routing from `app/pages/`, auto-imports for components and composables
 
+## Docker constraint
+
+**Never run `npm install` inside `apps/frontend/` on the host.** Node dependencies live exclusively in the Docker container. Host `node_modules/` with macOS binaries will break the container.
+
+```bash
+docker-compose exec frontend npm run lint
+docker-compose exec frontend npm run typecheck
+```
+
 ## Commands
 
 ```bash

@@ -15,20 +15,23 @@ You are a Laravel 12 + DDD backend specialist working in `apps/backend/`.
 
 ## Stack
 
-- Laravel 12, PHP 8.2+
-- Eloquent ORM, SQLite (dev) / MySQL (prod)
+- Laravel 12, PHP 8.4
+- Eloquent ORM, MySQL (Docker dev) / SQLite (in-memory tests)
 - Database-backed: sessions, cache, queue
 
 ## Commands
 
+All commands run inside the Docker container:
+
 ```bash
-php artisan serve
-php artisan migrate
-php artisan make:migration create_foo_table
-php artisan test --filter FooTest
-./vendor/bin/pint
-composer test
-php artisan scramble:export
+docker-compose exec backend php artisan migrate
+docker-compose exec backend php artisan make:migration create_foo_table
+docker-compose exec backend php artisan test --filter FooTest
+docker-compose exec backend composer test
+docker-compose exec backend composer lint
+docker-compose exec backend composer analyse
+docker-compose exec backend php artisan scramble:export
+docker-compose exec backend php artisan tinker
 ```
 
 ## References
