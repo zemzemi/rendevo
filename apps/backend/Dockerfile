@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.4-cli
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,7 +18,14 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts --no-autoloader --prefer-dist
 
+# Copy application files
 COPY . .
-RUN composer dump-autoload --optimize
+
+# Create required Laravel directories and set permissions
+RUN mkdir -p bootstrap/cache storage/framework/{sessions,views,cache/data} storage/logs \
+    && chmod -R 775 bootstrap/cache storage
+
+# Generate optimized autoload (without post-autoload scripts — run at startup)
+RUN composer dump-autoload --optimize --no-scripts
 
 EXPOSE 8000
